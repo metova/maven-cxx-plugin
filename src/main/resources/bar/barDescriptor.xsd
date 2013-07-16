@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.0" targetNamespace="http://www.qnx.com/schemas/application/1.0" xmlns="http://www.qnx.com/schemas/application/1.0" elementFormDefault="qualified">
-	<xs:element name="qnx" type="BarDescriptor" />
-	<xs:complexType name="BarDescriptor">
+	<xs:element name="qnx">
+        <xs:annotation>
+            <xs:appinfo>
+                <jxb:class name="BarDescriptor"/>
+            </xs:appinfo>
+        </xs:annotation>
+	<xs:complexType>
 		<xs:sequence>
 			<xs:element name="id" type="xs:string" />
 			<xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1" />
 			<xs:element name="versionNumber" type="xs:string" />
-			<xs:element name="build" type="xs:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="buildId" type="xs:int" minOccurs="0" maxOccurs="1" />
 			<xs:element name="versionLabel" type="xs:string" minOccurs="0" maxOccurs="1" />
 			<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1" />
 			<xs:element name="copyright" type="xs:string" minOccurs="0" maxOccurs="1" />
@@ -41,6 +46,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+    </xs:element>
 	<xs:complexType name="initialWindow">
 		<xs:sequence>
 			<xs:element name="content" type="xs:string" />
@@ -72,7 +78,6 @@
 			<xs:element name="platformArchitecture" type="xs:string" />
 			<xs:element name="asset" type="asset" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
-		<xs:attribute name="id" type="xs:string" use="required" />
 		<xs:attribute name="name" type="xs:string" use="required" />
 	</xs:complexType>
 </xs:schema>

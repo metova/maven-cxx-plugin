@@ -46,11 +46,14 @@ public class BarDescriptorService {
 
         List<AssetConfiguration> assetConfigurations = barDescriptor.getConfiguration();
         if ( assetConfigurations == null ) {
+
             return null;
         }
 
         for (AssetConfiguration assetConfiguration : assetConfigurations) {
+
             if ( target.equals( assetConfiguration.getName() ) ) {
+
                 return assetConfiguration;
             }
         }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hardisonbrewing</groupId>
+	<groupId>org.metova</groupId>
 	<artifactId>maven-cxx-plugin</artifactId>
-	<version>1.1.18.18-SNAPSHOT</version>
+	<version>2.0.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<name>${project.artifactId}</name>
 	<scm>
-		<url>git@github.com:hardisonbrewing/maven-cxx-plugin.git</url>
-		<developerConnection>scm:git:git@github.com:hardisonbrewing/maven-cxx-plugin.git</developerConnection>
+		<url>git@github.com:groomsy/maven-cxx-plugin.git</url>
+		<developerConnection>scm:git:git@github.com:groomsy/maven-cxx-plugin.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 	<build>
@@ -133,16 +133,16 @@
 			<version>2.2.4</version>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>hardisonbrewing-releases</id>
-			<url>http://repo.hardisonbrewing.org/nexus/content/repositories/releases</url>
-			<uniqueVersion>true</uniqueVersion>
-		</repository>
-		<snapshotRepository>
-			<id>hardisonbrewing-snapshots</id>
-			<url>http://repo.hardisonbrewing.org/nexus/content/repositories/snapshots</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
+  <distributionManagement>
+    <repository>
+      <id>metova</id>
+      <name>Metova Repo</name>
+      <url>http://repo.metova.com/nexus/content/repositories/metova/</url>
+    </repository>
+    <snapshotRepository>
+      <id>metova-snapshots</id>
+      <name>Metova Repo</name>
+      <url>http://repo.metova.com/nexus/content/repositories/metova-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>

@@ -130,7 +130,16 @@ public final class XCodeService {
 
         String schemePath = schemeFile.getPath();
         int lastIndexOf = schemePath.lastIndexOf( XCODEPROJ_EXTENSION );
-        schemePath = schemePath.substring( 0, lastIndexOf + XCODEPROJ_EXTENSION.length() );
+        if ( lastIndexOf == -1 ) {
+
+            lastIndexOf = schemePath.lastIndexOf( XCWORKSPACE_EXTENSION );
+            schemePath = schemePath.substring( 0, lastIndexOf );
+            schemePath += XCODEPROJ_EXTENSION;
+        }
+        else {
+
+            schemePath = schemePath.substring( 0, lastIndexOf + XCODEPROJ_EXTENSION.length() );
+        }
         return schemePath;
     }
 
@@ -192,12 +201,14 @@ public final class XCodeService {
 
     public static boolean isExpectedScheme( String scheme, String filePath ) {
 
-        String schemePath = getSchemePath( scheme, true );
+        boolean workspace = filePath.contains( XCWORKSPACE_EXTENSION );
+
+        String schemePath = getSchemePath( scheme, true, workspace );
         if ( filePath.matches( schemePath ) ) {
             return true;
         }
 
-        schemePath = getSchemePath( scheme, false );
+        schemePath = getSchemePath( scheme, false, workspace );
         if ( filePath.matches( schemePath ) ) {
             return true;
         }
@@ -252,12 +263,36 @@ public final class XCodeService {
         return stringBuffer.toString();
     }
 
+    public static String getWorkspaceSharedDataDirPath() {
+
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append( getXcworkspacePath() );
+        stringBuffer.append( File.separator );
+        stringBuffer.append( "xcshareddata" );
+        return stringBuffer.toString();
+    }
+
     public static String getSharedDataDirPath() {
 
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append( getXcprojPath() );
         stringBuffer.append( File.separator );
         stringBuffer.append( "xcshareddata" );
+        return stringBuffer.toString();
+    }
+
+    public static String getWorkspaceUserDataDirPath() {
+
+        Properties properties = PropertiesService.getProperties();
+        String username = properties.getProperty( "user.name" );
+
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append( getXcworkspacePath() );
+        stringBuffer.append( File.separator );
+        stringBuffer.append( "xcuserdata" );
+        stringBuffer.append( File.separator );
+        stringBuffer.append( username );
+        stringBuffer.append( ".xcuserdatad" );
         return stringBuffer.toString();
     }
 
@@ -276,10 +311,17 @@ public final class XCodeService {
         return stringBuffer.toString();
     }
 
-    public static String getSchemePath( String scheme, boolean shared ) {
+    public static String getSchemePath( String scheme, boolean shared, boolean workspace ) {
 
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append( shared ? getSharedDataDirPath() : getUserDataDirPath() );
+        if ( workspace ) {
+
+            stringBuffer.append( shared ? getWorkspaceSharedDataDirPath() : getWorkspaceUserDataDirPath() );
+        }
+        else {
+
+            stringBuffer.append( shared ? getSharedDataDirPath() : getUserDataDirPath() );
+        }
         stringBuffer.append( File.separator );
         stringBuffer.append( "xcschemes" );
         stringBuffer.append( File.separator );

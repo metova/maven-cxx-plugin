@@ -63,9 +63,11 @@ public class BarCompileMojo extends JoJoMojoImpl {
 
         CommandLineService.addQnxEnvVarArgs( cmd );
 
+        getLog().debug( "Target: " + target );
         AssetConfiguration configuration = BarDescriptorService.getAssetConfiguration( barDescriptor, target );
+        getLog().debug( "Configuration: " + configuration + "; Name: " + configuration.getName() );
         cmd.add( "-configuration" );
-        cmd.add( configuration.getId() );
+        cmd.add( configuration.getName() );
 
         Commandline commandLine = buildCommandline( cmd );
         commandLine.setWorkingDirectory( ProjectService.getBaseDirPath() );

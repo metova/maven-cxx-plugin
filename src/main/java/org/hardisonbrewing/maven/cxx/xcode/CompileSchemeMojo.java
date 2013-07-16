@@ -77,11 +77,12 @@ public final class CompileSchemeMojo extends AbstractCompileMojo {
             boolean expectedScheme = XCodeService.isExpectedScheme( scheme, schemeFile.getPath() );
             File schemeTmpFile = null;
 
-//            getLog().info( "schemeFile[" + schemeFile.getPath() + "], expectedScheme[" + expectedScheme + "]" );
+            getLog().info( "schemeFile[" + schemeFile.getPath() + "], expectedScheme[" + expectedScheme + "]" );
 
             try {
 
                 if ( expectedScheme ) {
+
                     File targetDirectory = TargetDirectoryService.getTargetDirectory();
                     schemeTmpFile = new File( targetDirectory, schemeFile.getName() );
                     FileUtils.copyFile( schemeFile, schemeTmpFile );
@@ -93,7 +94,7 @@ public final class CompileSchemeMojo extends AbstractCompileMojo {
 
                     File userFile = schemeFile;
 
-                    schemeFile = new File( XCodeService.getSchemePath( scheme, false ) );
+                    schemeFile = new File( XCodeService.getSchemePath( scheme, false, false ) );
                     FileUtils.ensureParentExists( schemeFile.getPath() );
 
                     FileUtils.copyFile( userFile, schemeFile );
@@ -151,6 +152,8 @@ public final class CompileSchemeMojo extends AbstractCompileMojo {
 
     private void injectPostAction( String schemeName, Scheme scheme, Document document, String action ) throws Exception {
 
+        getLog().info( "Injecting post action in schemeName[" + schemeName + "] for action[" + action + "] with document[" + document + "]" );
+
         Element root = (Element) document.getFirstChild();
 
         NodeList archiveActions = root.getElementsByTagName( action );
@@ -160,9 +163,11 @@ public final class CompileSchemeMojo extends AbstractCompileMojo {
 
         NodeList _postActions = archiveAction.getElementsByTagName( POST_ACTIONS );
         if ( _postActions.getLength() > 0 ) {
+
             postActions = (Element) _postActions.item( 0 );
         }
         else {
+
             postActions = document.createElement( POST_ACTIONS );
             archiveAction.appendChild( postActions );
         }
@@ -171,21 +176,15 @@ public final class CompileSchemeMojo extends AbstractCompileMojo {
 
         if ( ARCHIVE_ACTION.equals( action ) ) {
 
-//            Properties buildSettings = PropertiesService.getBuildSettings( schemeName );
-//            String target = (String) buildSettings.get( "TARGET_NAME" );
-//
-//            BuildableReference buildableReference = SchemeService.getBuildableReference( scheme, target );
-//
-//            Element postAction = createPostAction( document, buildableReference, schemeName );
-//            postActions.appendChild( postAction );
-
             buildableReferences = SchemeService.getBuildableReferences( scheme, true );
         }
         else {
+
             buildableReferences = SchemeService.getBuildableReferences( scheme, false );
         }
 
         for (BuildableReference buildableReference : buildableReferences) {
+
             String target = buildableReference.getBlueprintName();
             Element postAction = createPostAction( document, buildableReference, target );
             postActions.appendChild( postAction );
