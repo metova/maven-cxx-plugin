@@ -3,13 +3,13 @@
 
 		<component>
 			<role-hint>default</role-hint>
-			<role>org.hardisonbrewing.maven.cxx.component.ProjectConfigurationFactory</role>
-			<implementation>org.hardisonbrewing.maven.cxx.component.DefaultProjectConfigurationFactory</implementation>
+			<role>org.metova.maven.cxx.component.ProjectConfigurationFactory</role>
+			<implementation>org.metova.maven.cxx.component.DefaultProjectConfigurationFactory</implementation>
 		</component>
 		<component>
 			<role-hint>default</role-hint>
-			<role>org.hardisonbrewing.maven.cxx.component.BuildConfiguration</role>
-			<implementation>org.hardisonbrewing.maven.cxx.component.DefaultBuildConfiguration</implementation>
+			<role>org.metova.maven.cxx.component.BuildConfiguration</role>
+			<implementation>org.metova.maven.cxx.component.DefaultBuildConfiguration</implementation>
 			<configuration>
 				<sourceDirectory>src</sourceDirectory>
 			</configuration>
