@@ -40,7 +40,6 @@ public class CompileMojo extends JoJoMojoImpl {
 
         List<String> cmd = new LinkedList<String>();
         cmd.add( "make" );
-        cmd.add( "all" );
 
         Commandline commandLine = buildCommandline( cmd );
         CommandLineService.addQnxEnvVars( commandLine );
