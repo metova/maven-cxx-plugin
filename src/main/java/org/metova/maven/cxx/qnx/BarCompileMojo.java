@@ -45,6 +45,7 @@ public class BarCompileMojo extends JoJoMojoImpl {
         BarDescriptor barDescriptor = BarDescriptorService.getBarDescriptor();
 
         if ( barDescriptor == null ) {
+
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append( "No " );
             stringBuffer.append( BarDescriptorService.BAR_DESCRIPTOR_FILENAME );

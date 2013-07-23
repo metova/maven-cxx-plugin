@@ -50,7 +50,8 @@
 								org.metova:maven-metova-cxx-plugin:cdt-qcc-managed-assemble,
 								org.metova:maven-metova-cxx-plugin:cdt-qcc-managed-link,
 								org.metova:maven-metova-cxx-plugin:qnx-bar-compile</compile>
-							<prepare-package>org.metova:maven-metova-cxx-plugin:cdt-prepare-package</prepare-package>
+							<prepare-package>org.metova:maven-metova-cxx-plugin:qnx-bar-sign,
+                                org.metova:maven-metova-cxx-plugin:cdt-prepare-package</prepare-package>
 							<package>org.metova:maven-metova-cxx-plugin:package</package>
 							<install>org.apache.maven.plugins:maven-install-plugin:install</install>
 							<deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
@@ -182,7 +183,8 @@
 							<generate-sources>org.metova:maven-metova-cxx-plugin:dependency-copy</generate-sources>
 							<compile>org.metova:maven-metova-cxx-plugin:qnx-compile,
 								org.metova:maven-metova-cxx-plugin:qnx-bar-compile</compile>
-							<prepare-package>org.metova:maven-metova-cxx-plugin:qnx-prepare-package</prepare-package>
+							<prepare-package>org.metova:maven-metova-cxx-plugin:qnx-bar-sign,
+                                org.metova:maven-metova-cxx-plugin:qnx-prepare-package</prepare-package>
 							<package>org.metova:maven-metova-cxx-plugin:package</package>
 							<install>org.apache.maven.plugins:maven-install-plugin:install</install>
 							<deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
