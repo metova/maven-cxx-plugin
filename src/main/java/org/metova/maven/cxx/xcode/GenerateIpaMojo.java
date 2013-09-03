@@ -63,7 +63,7 @@ public final class GenerateIpaMojo extends JoJoMojoImpl {
     }
 
     private void execute( String target ) {
-
+        getLog().error( "In EXECUTE, target is: " + target );
         if ( !XCodeService.isApplicationType( target ) ) {
             return;
         }
@@ -72,7 +72,7 @@ public final class GenerateIpaMojo extends JoJoMojoImpl {
     }
 
     private void generateIpaFile( String target ) {
-
+        getLog().error( "In generateIpaFile, target is: " + target );
         List<String> cmd = new LinkedList<String>();
 
         cmd.add( "xcrun" );
@@ -91,18 +91,27 @@ public final class GenerateIpaMojo extends JoJoMojoImpl {
         if ( codesignIdentity != null ) {
             cmd.add( "--sign" );
             cmd.add( codesignIdentity );
+            
+            getLog().error( "In generateIpaFile, codesignIdentity is: " + codesignIdentity );
         }
 
         if ( provisioningProfile != null ) {
             File provisioningFile = ProvisioningProfileService.getProvisioningProfile( provisioningProfile );
             cmd.add( "--embed" );
             cmd.add( provisioningFile.getAbsolutePath() );
+            
+            getLog().error( "In generateIpaFile, provisioningProfile is: " + provisioningProfile + " - " + provisioningFile.getAbsolutePath() );
         }
-
+        
         Commandline commandLine = buildCommandline( cmd );
         if ( CommandLineService.getEnvVar( commandLine, CODESIGN_ALLOCATE ) == null ) {
             commandLine.addEnvironment( CODESIGN_ALLOCATE, getCodesignAllocate() );
+            
+            getLog().error( "In generateIpaFile, CODESIGN_ALLOCATE is: " + getCodesignAllocate() );
         }
+        
+        getLog().error( "In generateIpaFile, commandLine is: " + commandLine );
+        
         execute( commandLine );
     }
 

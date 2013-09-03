@@ -159,6 +159,12 @@ public final class PreparePackageMojo extends JoJoMojoImpl {
     }
 
     private void copyProvisioningFile( String target ) {
+        getLog().error( "---------------------------------------------------------------------" );
+        getLog().error( "---------------------------------------------------------------------" );
+        getLog().error( "In copyProvisioningFile, target is: " + target );
+        getLog().error( "In copyProvisioningFile, XCodeService.getEmbeddedProvisoningProfilePath is: " + XCodeService.getEmbeddedProvisoningProfilePath( target ) );
+        getLog().error( "---------------------------------------------------------------------" );
+        getLog().error( "---------------------------------------------------------------------" );
 
         File src = new File( XCodeService.getEmbeddedProvisoningProfilePath( target ) );
 
@@ -168,12 +174,18 @@ public final class PreparePackageMojo extends JoJoMojoImpl {
                 getLog().info( "Signing is disabled. Skipping packaging of missing file: " + src );
                 return;
             }
+            
+            getLog().error( "In copyProvisioningFile, codeSignIdentity is: " + codeSignIdentity );
         }
 
         StringBuffer destFilePath = new StringBuffer();
         destFilePath.append( target );
         destFilePath.append( "." );
         destFilePath.append( XCodeService.MOBILEPROVISION_EXTENSION );
+        
+        getLog().error( "In copyProvisioningFile, destFilePath is: " + destFilePath );
+        getLog().error( "---------------------------------------------------------------------" );
+        getLog().error( "---------------------------------------------------------------------" );
 
         prepareTargetFile( target, src, destFilePath.toString() );
     }
@@ -212,7 +224,13 @@ public final class PreparePackageMojo extends JoJoMojoImpl {
     }
 
     private final void prepareTargetFile( String target, File src, String filename ) {
-
+        getLog().error( "---------------------------------------------------------------------" );
+        getLog().error( "---------------------------------------------------------------------" );
+        getLog().error( "In prepareTargetFile, target is: " + target );
+        getLog().error( "In prepareTargetFile, filename is: " + filename );
+        getLog().error( "---------------------------------------------------------------------" );
+        getLog().error( "---------------------------------------------------------------------" );
+        
         if ( !archiveAction ) {
 
             String[] targets = XCodeService.getTargets();
