@@ -132,7 +132,6 @@ public final class PreparePackageMojo extends JoJoMojoImpl {
 
         String directoryRoot = XCodeService.getProductDirPath( target );
         File productDir = new File( directoryRoot );
-
         File productFile = new File( XCodeService.getProductFilePath( target ) );
 
         if ( !productFile.isDirectory() ) {
@@ -160,7 +159,15 @@ public final class PreparePackageMojo extends JoJoMojoImpl {
 
     private void copyProvisioningFile( String target ) {
 
-        File src = new File( XCodeService.getEmbeddedProvisoningProfilePath( target ) );
+        String provisioningPath = XCodeService.getEmbeddedProvisoningProfilePath( target );
+
+        String xcodeVersion = getProject().getProperties().getProperty( "maven.metova.cxx.plugin.xcode.version" );
+        if ( xcodeVersion.equals( "5" ) ) {
+            getLog().info( "property was 5" );
+            provisioningPath = provisioningPath + "embedded.mobileprovision";
+        }
+
+        File src = new File( provisioningPath );
 
         if ( !src.exists() ) {
             String codeSignIdentity = PropertiesService.getXCodeProperty( XCodeService.CODE_SIGN_IDENTITY );

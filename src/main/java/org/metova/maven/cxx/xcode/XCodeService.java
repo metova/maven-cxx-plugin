@@ -499,6 +499,7 @@ public final class XCodeService {
         stringBuffer.append( getProductFilePath( target ) );
         stringBuffer.append( File.separator );
         stringBuffer.append( properties.get( BUILD_EMBEDDED_PROFILE_NAME ) );
+
         return stringBuffer.toString();
     }
 
