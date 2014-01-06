@@ -65,22 +65,25 @@ public class UnlockKeychainMojo extends JoJoMojoImpl {
         }
         else {
 
-            boolean found = false;
+//            boolean found = false;
 
             getLog().info( "Checking current keychain search path..." );
             String[] keychains = listKeychains();
 
             for (String keychain : keychains) {
                 if ( keychain.equals( keychainPath ) ) {
-                    found = true;
+//                    found = true;
                     break;
                 }
             }
 
+            // Temporarily taking this out MINF-2613
+            /*
             if ( !found ) {
                 getLog().info( "Adding keychain to search path: " + keychainPath );
                 addKeychain( keychains, keychainPath );
             }
+            */
         }
 
         unlockKeychain( keychain, keychainPath );
